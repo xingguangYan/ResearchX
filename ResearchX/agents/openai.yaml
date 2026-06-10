@@ -1,0 +1,5 @@
+﻿# ResearchX — AI Research Operating System
+# UI metadata for the Codex skill chip
+display_name: "🔬 ResearchX"
+short_description: "AI research assistant for the full scientific lifecycle — from literature mining and method discovery to manuscript writing, graphical abstracts, peer review simulation, and grant proposals."
+default_prompt: "I need help with my research on [your topic]. I want to: (1) search latest literature, (2) find research gaps, (3) discover methods and innovations, (4) design experiments, (5) write a manuscript, or (6) plan a publication strategy. What's your current research stage?"
