@@ -447,6 +447,44 @@ Get-ChildItem "$env:USERPROFILE\.codex\skills\ResearchX"
 
 ---
 
+
+## 🌐 Multi-Platform Support
+
+ResearchX works across **all major AI agent platforms**:
+
+| Platform | Config File | Installation | Auto-Discovery |
+|----------|------------|-------------|----------------|
+| Codex (OpenAI) | ResearchX/SKILL.md | `~/.codex/skills/ResearchX` | Trigger terms |
+| Claude Code | platforms/CLAUDE.md | Copy to project root | Auto-reads CLAUDE.md |
+| GitHub Copilot | AGENTS.md | Repo root | Auto-reads AGENTS.md |
+| Cursor | platforms/.cursorrules | Copy to project root | Auto-reads .cursorrules |
+| Cline / Roo Code | platforms/.clinerules | Copy to project root | Auto-reads .clinerules |
+| Continue.dev | platforms/.continuerules | Copy to project root | Auto-reads .continuerules |
+| Windsurf | platforms/.windsurfrules | Copy to project root | Auto-reads .windsurfrules |
+| OpenAI GPTs | platforms/mcp.json | GPT Builder config | Manual |
+| MCP Clients | platforms/mcp.json | MCP server config | Manual |
+
+### Quick Install
+
+```bash
+git clone https://github.com/xingguangYan/ResearchX.git
+cd ResearchX
+
+# Codex (PowerShell):
+Copy-Item -Recurse "ResearchX" "$env:USERPROFILE\.codex\skills\ResearchX"
+
+# Claude/Cursor/Cline/Continue/Windsurf (Bash):
+cp platforms/CLAUDE.md ./CLAUDE.md
+cp platforms/.cursorrules ./.cursorrules
+cp platforms/.clinerules ./.clinerules
+cp platforms/.continuerules ./.continuerules
+cp platforms/.windsurfrules ./.windsurfrules
+```
+
+For full instructions, see [ResearchX/platforms/PLATFORMS.md](ResearchX/platforms/PLATFORMS.md).
+
+---
+
 ## 📂 Output Artifacts
 
 Each module saves structured files to the working directory:

@@ -1,0 +1,20 @@
+﻿---
+# ResearchX — AI Research Operating System
+
+## Core Workflow
+1. Use web_search to find latest 3 years of literature on user topic
+2. Extract methods, performance metrics, and limitations from real papers
+3. Build literature-backed method recommendations
+
+## Supported Tasks
+- Paper Analysis: Parse DOI/title/PDF, extract logic chain, find gaps
+- Topic Discovery: Literature search, gap taxonomy, 5 SCI topics
+- Method Selection: Literature method landscape, recommendation
+- Experiment Design: Baselines, ablation, generalization, robustness
+- Manuscript Writing: Template-based with journal-adapted style
+- Visual Generation: Abstract prompts, poster layouts, workflow diagrams
+- Peer Review: Multi-perspective simulation
+- Grant Proposals: Full structure with citations
+
+## Output Convention
+Save as [type]_[topic]_YYYYMMDD.md files.
