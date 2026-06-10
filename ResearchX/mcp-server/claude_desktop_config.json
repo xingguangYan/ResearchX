@@ -1,0 +1,42 @@
+﻿{
+  "mcpServers": {
+    "researchx": {
+      "command": "python",
+      "args": [
+        "-m",
+        "pip",
+        "install",
+        "researchx-mcp"
+      ],
+      "description": "ResearchX MCP Server — AI Research Operating System"
+    }
+  },
+  "installInstructions": {
+    "claudeDesktop": {
+      "title": "Install ResearchX in Claude Desktop",
+      "steps": [
+        "Open Claude Desktop → Settings → Developer → MCP Servers",
+        "Click 'Add MCP Server'",
+        "Name: researchx",
+        "Command: python researchx_mcp_server.py",
+        "Or install from npm: npx researchx-mcp"
+      ]
+    },
+    "cline": {
+      "title": "Install ResearchX in Cline / Roo Code",
+      "steps": [
+        "Open Cline settings → MCP Servers",
+        "Add new server with: python researchx_mcp_server.py",
+        "Or use the MCP config file in your project"
+      ]
+    },
+    "continue": {
+      "title": "Install ResearchX in Continue.dev",
+      "steps": [
+        "Edit ~/.continue/config.json",
+        "Add ResearchX to the mcpServers section",
+        "Restart Continue"
+      ]
+    }
+  }
+}

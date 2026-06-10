@@ -1,0 +1,52 @@
+﻿{
+  "name": "researchx-mcp",
+  "version": "1.0.0",
+  "description": "ResearchX — AI Research Operating System. MCP server providing research tools for the full scientific lifecycle. Literature-driven, multi-platform.",
+  "type": "module",
+  "main": "researchx_mcp_server.py",
+  "bin": {
+    "researchx-mcp": "./researchx_mcp_server.py"
+  },
+  "scripts": {
+    "start": "python researchx_mcp_server.py",
+    "sse": "python researchx_mcp_server.py --transport sse --port 8080"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "research",
+    "academic",
+    "scientific",
+    "paper-analysis",
+    "literature-review",
+    "research-agent",
+    "ai-research",
+    "claude-mcp",
+    "researchx"
+  ],
+  "author": "ResearchX Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xingguangYan/ResearchX.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xingguangYan/ResearchX/issues"
+  },
+  "homepage": "https://github.com/xingguangYan/ResearchX",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "researchx_mcp_server.py",
+    "README.md",
+    "package.json"
+  ],
+  "mcp": {
+    "server": {
+      "command": "python",
+      "args": ["researchx_mcp_server.py"],
+      "env": {}
+    }
+  }
+}

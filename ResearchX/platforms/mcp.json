@@ -2,13 +2,20 @@
   "name": "researchx",
   "version": "1.0.0",
   "description": "ResearchX — AI Research Operating System. Literature-driven research assistant for the full scientific lifecycle.",
-  "instructions": "ResearchX is an AI research assistant that NEVER hardcodes methods. Instead, it searches the latest 3 years of literature via web_search to dynamically discover methods, innovations, and research gaps for any scientific topic. It covers the full research lifecycle: paper analysis, gap mining, method discovery, experiment design, manuscript writing, visual generation, peer review, and grant proposals.",
-  "tools": {
-    "web_search": {
-      "description": "Search the web for latest scientific literature.",
-      "required": true
+  "mcpServers": {
+    "researchx": {
+      "command": "python",
+      "args": ["researchx_mcp_server.py"],
+      "env": {},
+      "description": "ResearchX MCP Server — 10 research tools for paper analysis, gap mining, method discovery, experiment design, manuscript writing, peer review, and grant proposals."
     }
   },
+  "installSources": {
+    "npm": "npx researchx-mcp",
+    "pip": "pip install researchx-mcp",
+    "github": "https://github.com/xingguangYan/ResearchX"
+  },
+  "supportedClients": ["claude-desktop", "cline", "roo-code", "continue", "cursor"],
   "triggers": [
     "research paper", "SCI", "literature review", "research gap",
     "methodology", "experiment design", "manuscript", "grant proposal",

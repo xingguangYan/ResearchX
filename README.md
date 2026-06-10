@@ -413,6 +413,46 @@ requires 500+ samples).
 
 ---
 
+
+
+## 🔍 How to Find & Install ResearchX
+
+ResearchX is available on **10+ platforms and registries**:
+
+| Platform | How to Find | Install Command |
+|----------|------------|----------------|
+| GitHub | Search "xingguangYan/ResearchX" | `git clone https://github.com/xingguangYan/ResearchX.git` |
+| Codex (OpenAI) | `codex plugin add researchx@personal` | Auto-discovers via triggers |
+| Claude Desktop | MCP: researchx-mcp | `npx researchx-mcp` |
+| Claude Code | Copy CLAUDE.md to project root | Auto-reads CLAUDE.md |
+| npm Registry | `npm search researchx` | `npm install researchx-mcp` |
+| PyPI | `pip search researchx-mcp` | `pip install researchx-mcp` |
+| GPT Store | Search "ResearchX" | GPT config in mcp-server/ |
+| Cline / Roo Code | MCP: researchx-mcp | Copy .clinerules |
+| Continue.dev | MCP: researchx-mcp | Copy .continuerules |
+| Cursor | Copy .cursorrules | Auto-reads |
+| Windsurf | Copy .windsurfrules | Auto-reads |
+
+### GitHub Discovery
+Search GitHub for: [ResearchX](https://github.com/search?q=ResearchX) or [ai research operating system](https://github.com/search?q=ai+research+operating+system)
+
+### MCP Discovery
+Any MCP client can use ResearchX:
+```json
+{
+  "mcpServers": {
+    "researchx": {
+      "command": "npx",
+      "args": ["researchx-mcp"]
+    }
+  }
+}
+```
+
+For full instructions: [ResearchX/DISCOVERY.md](ResearchX/DISCOVERY.md) and [ResearchX/platforms/PLATFORMS.md](ResearchX/platforms/PLATFORMS.md).
+
+---
+
 ## 📦 Installation
 
 ### Method 1: Direct Copy (Local)
