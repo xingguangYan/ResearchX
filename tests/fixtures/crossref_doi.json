@@ -1,0 +1,17 @@
+{
+  "status": "ok",
+  "message": {
+    "DOI": "10.1016/j.rse.2024.114123",
+    "title": ["A foundation model for global crop mapping from Sentinel-2 time series"],
+    "author": [
+      {"family": "Chen", "given": "Wei"},
+      {"family": "Kumar", "given": "Anil"},
+      {"family": "Zhang", "given": "Li"}
+    ],
+    "issued": {"date-parts": [[2024, 5, 1]]},
+    "container-title": ["Remote Sensing of Environment"],
+    "type": "journal-article",
+    "is-referenced-by-count": 87,
+    "update-to": []
+  }
+}

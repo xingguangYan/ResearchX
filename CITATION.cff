@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: "ResearchX — literature-grounded research assistant with verified citations"
+message: "If ResearchX contributed to a paper, dataset, or review, please cite it."
+type: software
+authors:
+  - name: "ResearchX contributors"
+repository-code: "https://github.com/xingguangYan/ResearchX"
+url: "https://github.com/xingguangYan/ResearchX"
+license: MIT
+version: 4.0.0
+date-released: "2026-09-16"
+keywords:
+  - research-assistant
+  - literature-review
+  - systematic-review
+  - prisma
+  - citation-verification
+  - agent-skills
+  - claude-code
+  - codex
+abstract: >-
+  ResearchX is an agent skill that runs the full research lifecycle: gap mining, method
+  discovery, experiment design, manuscript writing, journal-fit upgrades, adversarial peer
+  review, PRISMA systematic reviews, figures, and grant proposals. Every reference it emits
+  is verified against Crossref, OpenAlex and arXiv, so fabricated citations are structurally
+  prevented rather than merely discouraged.

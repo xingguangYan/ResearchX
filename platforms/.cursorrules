@@ -1,0 +1,9 @@
+You have the ResearchX skill available at skills/researchx/.
+
+Before any research task, read skills/researchx/SKILL.md and follow its contract:
+- Route the request to a module (M1 paper analysis … M12 reproducibility) and chain modules as it specifies.
+- Load references/*.md only for the module you are running.
+- Verify every reference with `python skills/researchx/scripts/verify_citations.py`; label anything that
+  cannot be verified as [UNVERIFIED] with the reason. Never fabricate a citation, number, DOI or result.
+- Record the search strings, registries and date in the output header; save deliverables as .md files.
+- End with the verification status and one recommended next module.

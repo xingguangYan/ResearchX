@@ -1,0 +1,21 @@
+{
+  "name": "researchx-mcp",
+  "version": "4.0.0",
+  "description": "ResearchX MCP server — citation-verified research tools (verify_citations, search_literature, prisma_screen, analyze_methods, generate_visuals) for any MCP client. Zero dependencies: it speaks JSON-RPC over stdio directly.",
+  "license": "MIT",
+  "homepage": "https://github.com/xingguangYan/ResearchX",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xingguangYan/ResearchX.git"
+  },
+  "keywords": ["mcp", "model-context-protocol", "research", "literature-review", "citation-check", "prisma", "academic"],
+  "bin": {
+    "researchx-mcp": "researchx_mcp_server.py"
+  },
+  "files": ["researchx_mcp_server.py", "README.md"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "check": "python researchx_mcp_server.py --selftest",
+    "list": "python researchx_mcp_server.py --list"
+  }
+}

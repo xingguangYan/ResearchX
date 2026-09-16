@@ -1,0 +1,11 @@
+# ResearchX rules
+
+For research tasks, use the ResearchX skill (skills/researchx/):
+1. Read skills/researchx/SKILL.md and follow its module router and quality gates.
+2. Run the bundled stdlib scripts instead of guessing: verify_citations.py (citation verification),
+   search_literature.py (structured retrieval), prisma_screen.py (screening + PRISMA counts),
+   analyze_methods.py, generate_visuals.py. All accept --help.
+3. Never emit a reference that verify_citations has not confirmed or that is not labelled [UNVERIFIED].
+   Never state a number without a retrieved source.
+4. Save outputs to files (analysis_*.md, topics_*.md, methods_*.md, manuscript_*.md, citation_audit_*.md).
+5. If retrieval fails, say so and continue with labelled first-principles reasoning.

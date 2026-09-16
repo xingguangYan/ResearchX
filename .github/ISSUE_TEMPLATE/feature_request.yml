@@ -1,0 +1,34 @@
+name: Feature request
+description: A research workflow, registry, language or platform we should support
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The research problem
+      description: What are you trying to get done, and where does ResearchX currently fail you?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behaviour
+      description: What should the agent do? Which module does it belong to?
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Citation verification / integrity
+        - Literature search / systematic review
+        - Writing / journal fit / peer review
+        - Experiments / statistics / reproducibility
+        - Grants / proposals
+        - Figures / visuals
+        - Language or regional coverage
+        - Platform / packaging / MCP
+        - Documentation
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

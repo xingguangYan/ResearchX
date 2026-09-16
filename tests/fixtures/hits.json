@@ -1,0 +1,13 @@
+{
+  "query": "crop mapping deep learning",
+  "sources": ["openalex", "crossref"],
+  "results": [
+    {"id": "1", "title": "A foundation model for global crop mapping", "doi": "10.1016/j.rse.2024.114123", "year": "2024", "source": "openalex", "type": "article", "abstract": "crop mapping with transformers", "authors": ["Chen", "Kumar"]},
+    {"id": "2", "title": "A foundation model for global crop mapping!", "doi": null, "year": "2024", "source": "crossref", "type": "article", "abstract": "duplicate title, different punctuation"},
+    {"id": "3", "title": "A review of crop mapping methods", "doi": "10.1000/review.2022.1", "year": "2022", "source": "crossref", "type": "review", "abstract": "review of crop mapping"},
+    {"id": "4", "title": "Crop yield prediction with LSTMs", "doi": "10.1000/yield.2019.1", "year": "2019", "source": "openalex", "type": "article", "abstract": "yield forecasting"},
+    {"id": "5", "title": "Editorial: the future of agricultural AI", "doi": "10.1000/editorial.2024.1", "year": "2024", "source": "crossref", "type": "editorial", "abstract": "editorial"},
+    {"id": "6", "title": "Crop type mapping with Sentinel-2 and U-Net", "doi": "10.1000/unet.2023.1", "year": "2023", "source": "openalex", "type": "article", "abstract": "crop type mapping"},
+    {"id": "7", "title": "Sentinel-1 SAR for rice mapping in monsoon regions", "doi": "10.1000/rice.2021.1", "year": "2021", "source": "openalex", "type": "article", "abstract": "rice mapping, unrelated to crop type transfer learning"}
+  ]
+}
