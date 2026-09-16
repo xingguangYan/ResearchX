@@ -1,4 +1,4 @@
-﻿"""ResearchX — Literature Analysis & Method Mining Tool
+"""ResearchX — Literature Analysis & Method Mining Tool
 
 Analyzes paper data from web_search results to produce:
   - Method taxonomy & trend analysis
@@ -186,6 +186,10 @@ def format_markdown(report: dict) -> str:
     lines = [
         f"# ResearchX Method Analysis Report",
         f"",
+        f"> Built from the paper set you supplied. Every family, trend and gap below inherits the",
+        f"> quality of that file — if it came from `search_literature.py` (real registry records),",
+        f"> these numbers are traceable; if it came from memory, they are not. Cite the DOIs.",
+        f"",
         f"**Generated**: {report['report_metadata']['generated_at']}",
         f"**Papers Analyzed**: {s['total_papers']}",
         f"**Year Range**: {' - '.join(report['report_metadata']['year_range'])}",
@@ -226,35 +230,51 @@ def format_markdown(report: dict) -> str:
 # --------------- CLI ---------------
 
 def main():
-    parser = argparse.ArgumentParser(description="ResearchX — Literature Method Mining & Analysis")
-    parser.add_argument("--input", "-i", required=True, help="Input JSON file with paper data")
-    parser.add_argument("--output", "-o", default="analysis_report.json", help="Output file path")
-    parser.add_argument("--format", "-f", choices=["json", "markdown"], default="json", help="Output format")
+    parser = argparse.ArgumentParser(
+        prog="analyze_methods.py",
+        description="ResearchX — method mining & trend analysis over a paper set (stdlib only)",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="Input: JSON array of {title, year, journal, method, result, limitation, dataset, innovation}",
+    )
+    parser.add_argument("--input", "-i", required=True, help="JSON paper set (see the format below)")
+    parser.add_argument("--out", "-o", default=None, help="write the report here (default: stdout)")
+    parser.add_argument("--format", "-f", choices=["json", "md", "markdown"], default="md",
+                        help="md (default) or json")
+    parser.add_argument("--quiet", "-q", action="store_true", help="suppress the summary line")
     args = parser.parse_args()
 
     if not Path(args.input).exists():
-        print(f"Error: Input file not found: {args.input}", file=sys.stderr)
-        sys.exit(1)
+        print(f"error: input file not found: {args.input}", file=sys.stderr)
+        return 2
 
     papers = load_papers(args.input)
+    if not papers:
+        print("error: no paper records in the input file", file=sys.stderr)
+        return 3
+
     report = generate_report(papers)
-    s = report["summary"]
+    summary = report["summary"]
 
-    if args.format == "markdown":
-        output = format_markdown(report)
+    output = format_markdown(report) if args.format in ("md", "markdown") else json.dumps(
+        report, ensure_ascii=False, indent=2
+    )
+
+    if args.out:
+        Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.out).write_text(output + "\n", encoding="utf-8")
+        if not args.quiet:
+            print(f"report written to {args.out}", file=sys.stderr)
     else:
-        output = json.dumps(report, ensure_ascii=False, indent=2)
+        print(output)
 
-    Path(args.output).write_text(output, encoding="utf-8")
-
-    print(f"ResearchX Analysis Complete")
-    print(f"  Papers:     {s['total_papers']}")
-    print(f"  Methods:    {s['unique_methods']}")
-    print(f"  Trends:     {', '.join(s['emerging_trends'][:3])}")
-    print(f"  Top gaps:   {', '.join(s['critical_gaps'][:3])}")
-    print(f"  Datasets:   {', '.join(s['recommended_datasets'][:3])}")
-    print(f"  Output:     {args.output}")
+    if not args.quiet:
+        print("# ResearchX method analysis", file=sys.stderr)
+        print(f"#   papers:   {summary['total_papers']}", file=sys.stderr)
+        print(f"#   methods:  {summary['unique_methods']}", file=sys.stderr)
+        print(f"#   trends:   {', '.join(summary['emerging_trends'][:3]) or '-'}", file=sys.stderr)
+        print(f"#   gaps:     {', '.join(summary['critical_gaps'][:3]) or '-'}", file=sys.stderr)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
