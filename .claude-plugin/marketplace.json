@@ -1,0 +1,36 @@
+{
+  "name": "researchx",
+  "description": "ResearchX — literature-grounded research assistant: gaps, methods, experiments, manuscripts, reviews, grants, verified citations.",
+  "owner": {
+    "name": "ResearchX contributors",
+    "url": "https://github.com/xingguangYan/ResearchX"
+  },
+  "plugins": [
+    {
+      "name": "researchx",
+      "source": "./",
+      "description": "Full research lifecycle skill: paper analysis, gap mining, method discovery, experiment design, manuscript writing, journal-fit upgrades, adversarial peer review, literature/systematic reviews (PRISMA), figures, grant proposals — with Crossref/OpenAlex/arXiv citation verification so no fabricated references.",
+      "version": "4.0.0",
+      "author": {
+        "name": "ResearchX contributors",
+        "url": "https://github.com/xingguangYan/ResearchX"
+      },
+      "homepage": "https://github.com/xingguangYan/ResearchX",
+      "repository": "https://github.com/xingguangYan/ResearchX",
+      "license": "MIT",
+      "category": "research",
+      "keywords": [
+        "research",
+        "literature-review",
+        "systematic-review",
+        "prisma",
+        "citation-verification",
+        "manuscript-writing",
+        "peer-review",
+        "grant-proposal",
+        "academic-writing",
+        "skills"
+      ]
+    }
+  ]
+}

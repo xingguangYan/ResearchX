@@ -1,0 +1,6 @@
+{
+  "name": "researchx",
+  "description": "Research assistant for the full scientific lifecycle with verified citations (Crossref/OpenAlex/arXiv), PRISMA reviews, and manuscript/peer-review/grant workflows.",
+  "version": "4.0.0",
+  "contextFileName": "GEMINI.md"
+}

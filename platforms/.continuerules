@@ -1,0 +1,8 @@
+ResearchX skill available at skills/researchx/.
+- Follow skills/researchx/SKILL.md (task router, citation-integrity protocol, quality gates).
+- Verify any reference you intend to output:
+  `python skills/researchx/scripts/verify_citations.py <file> --format md`
+  Unverifiable references are labelled [UNVERIFIED], never invented.
+- Use `python skills/researchx/scripts/search_literature.py --query "..." --from-year <YYYY>` for retrieval
+  instead of model memory, and record queries + date in the output.
+- Write deliverables to markdown files with the documented naming pattern.

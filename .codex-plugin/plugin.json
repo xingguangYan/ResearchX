@@ -1,0 +1,44 @@
+{
+  "name": "researchx",
+  "version": "4.0.0",
+  "description": "Literature-grounded research assistant: paper analysis, gap and method mining, experiment design, manuscript writing, PRISMA reviews, peer review, grants — every citation verified against Crossref/OpenAlex/arXiv.",
+  "author": {
+    "name": "ResearchX contributors",
+    "url": "https://github.com/xingguangYan/ResearchX"
+  },
+  "homepage": "https://github.com/xingguangYan/ResearchX",
+  "repository": "https://github.com/xingguangYan/ResearchX",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "literature-review",
+    "systematic-review",
+    "citation-verification",
+    "manuscript",
+    "peer-review",
+    "grant",
+    "prisma"
+  ],
+  "skills": "./skills/",
+  "hooks": {},
+  "interface": {
+    "displayName": "ResearchX",
+    "shortDescription": "Research assistant with verified citations — from gap finding to submission.",
+    "longDescription": "ResearchX runs the whole research loop: mine the literature for gaps and methods, design experiments, write and upgrade the manuscript, stress-test it with an adversarial peer review, build the literature matrix or a PRISMA systematic review, produce figures and graphical abstracts, package the artifact, and write the grant. Its distinguishing rule: no reference reaches you until Crossref/OpenAlex/arXiv confirm it, and unverifiable references are labelled instead of invented.",
+    "developerName": "ResearchX contributors",
+    "category": "Research",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "defaultPrompt": [
+      "Find a publishable research gap in my field and propose five topics with literature-backed methods.",
+      "Check every reference in my draft and tell me which ones are real.",
+      "Run a systematic review on this question with PRISMA counts and a screening ledger."
+    ],
+    "websiteURL": "https://github.com/xingguangYan/ResearchX",
+    "privacyPolicyURL": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
+    "termsOfServiceURL": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
+    "brandColor": "#2563EB",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/icon.svg",
+    "screenshots": []
+  }
+}

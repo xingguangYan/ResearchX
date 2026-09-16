@@ -1,0 +1,15 @@
+{
+  "name": "researchx",
+  "displayName": "ResearchX",
+  "description": "Research assistant with verified citations: gap mining, methods, experiments, manuscripts, PRISMA reviews, grants.",
+  "version": "4.0.0",
+  "author": {
+    "name": "ResearchX contributors",
+    "url": "https://github.com/xingguangYan/ResearchX"
+  },
+  "homepage": "https://github.com/xingguangYan/ResearchX",
+  "repository": "https://github.com/xingguangYan/ResearchX",
+  "license": "MIT",
+  "keywords": ["research", "literature-review", "citation-verification", "manuscript", "prisma"],
+  "skills": "./skills/"
+}

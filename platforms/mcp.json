@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "researchx": {
+      "command": "python",
+      "args": ["/absolute/path/to/ResearchX/mcp-server/researchx_mcp_server.py"],
+      "env": {
+        "RESEARCHX_MAILTO": "you@institution.edu"
+      }
+    }
+  }
+}

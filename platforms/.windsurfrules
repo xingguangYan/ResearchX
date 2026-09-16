@@ -1,0 +1,7 @@
+Research tasks: use the ResearchX skill in skills/researchx/.
+1. Read SKILL.md first; load references/*.md only for the module in use.
+2. Citations: run verify_citations.py; unverifiable → [UNVERIFIED] with reason. Never invent references
+   or numbers.
+3. Retrieval: search_literature.py (OpenAlex/Crossref/arXiv) with year filters and citation chaining.
+4. Reviews: prisma_screen.py for dedupe, screening, PRISMA counts, flow diagram and screening ledger.
+5. Output: markdown files with the documented names, plus the verification status summary.
