@@ -143,7 +143,9 @@ Data & code availability statement, environment/version lock, seeds and hardware
 
 ## 4. Bundled scripts
 
-Run from the skill root. All are stdlib-only, non-interactive, accept `--help`, and print JSON or Markdown.
+Paths below are relative to the repository root (drop the `skills/researchx/` prefix if you are already
+inside the skill directory). All scripts are stdlib-only, non-interactive, accept `--help`, and print JSON
+or Markdown.
 
 | Script | Purpose | Typical use |
 |---|---|---|

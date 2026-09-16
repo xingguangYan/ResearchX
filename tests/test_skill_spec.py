@@ -198,3 +198,21 @@ def test_validate_skill_passes():
         timeout=180,
     )
     assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_local_markdown_links_resolve():
+    """A broken link in the README or docs is a discovery bug — catch it in CI."""
+    roots = [REPO / "README.md", REPO / "AGENTS.md", REPO / "CONTRIBUTING.md"]
+    roots += sorted((REPO / "docs").glob("*.md"))
+    roots += [SKILL_MD]
+    pattern = re.compile(r"\[[^\]]+\]\(([^)#\s]+)\)")
+    broken = []
+    for path in roots:
+        text = path.read_text(encoding="utf-8")
+        for target in pattern.findall(text):
+            if target.startswith(("http://", "https://", "mailto:", "#")):
+                continue
+            candidate = (path.parent / target).resolve()
+            if not candidate.exists():
+                broken.append(f"{path.relative_to(REPO)} -> {target}")
+    assert not broken, "broken local links: " + "; ".join(broken)
