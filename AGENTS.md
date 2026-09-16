@@ -32,12 +32,23 @@ docs/                      # install guide, comparison, roadmap, launch kit
 5. No fabricated references, numbers, datasets, or results anywhere in docs, examples, or templates.
 6. Tests must pass offline: registry access goes through the injectable `rx_common.Net` transport.
 
+## Releases
+
+- `scripts/bump_version.py` owns the version (SKILL.md `metadata.version` is authoritative;
+  `--check` verifies all eleven locations, `--set X.Y.Z` updates them, `--tag vX.Y.Z` gates a release).
+- `scripts/package_skill.py` builds the deterministic release archives; `scripts/extract_release_notes.py`
+  produces the GitHub Release body from `RELEASE-NOTES.md`.
+- Never hand-edit a version in one file only, and never tag a version that `--check` rejects.
+- Any change to the version plumbing must keep `tests/test_release.py` green (it rebuilds the archives
+  twice and compares bytes).
+
 ## Workflow
 
 ```bash
 make test        # pytest suite (offline, uses recorded registry fixtures)
 make validate    # Agent Skills spec + repo hygiene checks
-make check       # both, plus JSON manifest validation
+make check       # both, plus manifests and version consistency
+make dist        # build release artifacts + print the publish command
 ```
 
 When changing a script: update `--help`, the docstring, the SKILL.md table entry, and `references/gotchas.md`

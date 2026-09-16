@@ -9,6 +9,7 @@
 Gap mining → methods → experiments → manuscript → peer review → submission — every reference checked
 against Crossref, OpenAlex and arXiv before it reaches you.
 
+[![release](https://img.shields.io/github/v/release/xingguangYan/ResearchX?style=flat-square&color=2563EB&label=release)](https://github.com/xingguangYan/ResearchX/releases)
 [![validate](https://github.com/xingguangYan/ResearchX/actions/workflows/validate.yml/badge.svg)](https://github.com/xingguangYan/ResearchX/actions/workflows/validate.yml)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-spec--compliant-2563EB?style=flat-square)](https://agentskills.io/specification)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
@@ -67,6 +68,20 @@ The rule is not "try not to hallucinate". The rule is **`NOT_FOUND` gets labelle
 | **GitHub Copilot CLI** | `copilot plugin marketplace add xingguangYan/ResearchX` |
 | **Antigravity** | `agy plugin install https://github.com/xingguangYan/ResearchX` |
 | **Claude / any agent (manual)** | copy `skills/researchx/` into your skills directory (see below) |
+
+### Download a release (no clone)
+
+Every tag publishes deterministic archives with checksums:
+
+| Artifact | Use |
+|---|---|
+| `researchx-skill-vX.Y.Z.zip` | unzip → copy the `researchx/` folder into your skills directory |
+| `researchx-skill-vX.Y.Z.tar.gz` | same, tar flavour |
+| `researchx-mcp-vX.Y.Z.tar.gz` | MCP server + the scripts it calls |
+| `SHA256SUMS` | verify the download (`sha256sum -c SHA256SUMS`) |
+
+See [Releases](https://github.com/xingguangYan/ResearchX/releases) and [`RELEASE-NOTES.md`](RELEASE-NOTES.md)
+(what changed, how to upgrade, known limitations).
 
 ### Manual install
 
@@ -199,9 +214,12 @@ skills/researchx/           the skill (this is what agents load)
 └── evals/                  trigger + behaviour cases
 .claude-plugin/ .codex-plugin/ .cursor-plugin/ gemini-extension.json   install manifests
 mcp-server/                 optional MCP server
+scripts/                    repo tooling: version bump/check, release packaging, note extraction
 tests/                      offline pytest suite + Agent Skills spec validator
 platforms/                  rule files for Cursor, Cline, Continue, Windsurf, Copilot
 docs/                       INSTALL · COMPARISON · ROADMAP · LAUNCH-KIT · DISCOVERY
+RELEASE-NOTES.md            user-facing notes per release (the GitHub Release body)
+CHANGELOG.md                developer history
 ```
 
 ---
@@ -236,6 +254,21 @@ yours — that is by design.
 supported; original-language titles are preserved with translations in brackets.
 
 ---
+
+## Releasing
+
+Version numbers live in eleven places and `scripts/bump_version.py` owns all of them:
+
+```bash
+python scripts/bump_version.py --check          # CI gate: everything must agree
+python scripts/bump_version.py --set 4.1.0      # bump SKILL.md + manifests + constants
+python scripts/package_skill.py --out dist      # deterministic zip/tar.gz + SHA256SUMS
+git tag -a v4.1.0 -m "ResearchX v4.1.0" && git push origin v4.1.0
+```
+
+Pushing a `v*` tag runs `.github/workflows/release.yml`, which validates the skill, runs the test suite,
+checks the tag against the version, builds the archives and publishes the GitHub Release using the notes
+from `RELEASE-NOTES.md`. Full process: [`RELEASE-NOTES.md`](RELEASE-NOTES.md#release-process-maintainers).
 
 ## Contributing · License · Citation
 

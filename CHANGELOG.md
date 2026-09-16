@@ -22,6 +22,11 @@ The citation-integrity release: layout, guarantees, tooling and packaging all ch
   `tests/validate_skill.py` (Agent Skills spec validator); GitHub Actions workflow runs both.
 - **One-command installs** — plugin manifests for Claude Code (`.claude-plugin/`), Codex
   (`.codex-plugin/`), Cursor (`.cursor-plugin/`) and Gemini CLI (`gemini-extension.json`).
+- **Release engineering** — `scripts/bump_version.py` owns the version across eleven locations
+  (`--check` gates CI, `--set` bumps, `--tag` validates a release tag); `scripts/package_skill.py` builds
+  deterministic zip/tar.gz archives plus `SHA256SUMS`; `scripts/extract_release_notes.py` produces the
+  GitHub Release body from `RELEASE-NOTES.md`; `.github/workflows/release.yml` publishes on a `v*` tag.
+- `RELEASE-NOTES.md` — user-facing notes per release (highlights, install, verify, upgrade, limitations).
 - `LICENSE` (MIT), `CITATION.cff`, `CONTRIBUTING.md`, `CHANGELOG.md`, `SECURITY.md`,
   `CODE_OF_CONDUCT.md`, `Makefile`, icon assets.
 

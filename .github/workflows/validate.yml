@@ -26,6 +26,8 @@ jobs:
         run: python -m pytest tests -q
       - name: Check JSON manifests
         run: make manifests
+      - name: Check version consistency (SKILL.md is authoritative)
+        run: python scripts/bump_version.py --check
       - name: CLI smoke test (help + offline behaviour)
         run: |
           python skills/researchx/scripts/verify_citations.py --help > /dev/null

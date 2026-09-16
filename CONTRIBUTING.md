@@ -39,6 +39,21 @@ python tests/validate_skill.py --strict
 3. Update the docs that describe the behaviour: `SKILL.md`, `references/*`, `README.md`, `CHANGELOG.md`.
 4. Open a PR explaining the research workflow it improves, and how you tested it.
 
+## Release checklist (maintainers)
+
+```bash
+python scripts/bump_version.py --set X.Y.Z     # bumps SKILL.md, manifests, constants, CITATION.cff
+$EDITOR CHANGELOG.md RELEASE-NOTES.md          # developer history + user-facing notes (Install/Verify/Limitations)
+make check                                     # spec validator, tests, manifests, version consistency
+python scripts/package_skill.py --out dist     # optional local check of the artifacts
+git commit -am "chore(release): vX.Y.Z"
+git tag -a vX.Y.Z -m "ResearchX vX.Y.Z" && git push origin main --follow-tags
+```
+
+The tag triggers `.github/workflows/release.yml` (validate → test → tag/version gate → build → publish).
+Notes must state what changed, how to install/upgrade, and the known limitations — a release without
+limitations is a release nobody trusts.
+
 ## Reporting problems
 
 Open an issue with: the command or prompt you ran, the input, the observed output, and what you expected.

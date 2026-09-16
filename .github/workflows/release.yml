@@ -1,0 +1,97 @@
+name: release
+
+# Publishing a release = pushing a tag that matches the version in SKILL.md.
+#   python scripts/bump_version.py --set 4.1.0
+#   git tag -a v4.1.0 -m "ResearchX v4.1.0" && git push origin v4.1.0
+# The workflow validates, tests, checks the tag against the version, builds deterministic
+# artifacts, extracts the notes from RELEASE-NOTES.md and creates the GitHub Release.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to release (e.g. v4.0.0)"
+        required: true
+      prerelease:
+        description: "Mark as pre-release"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: publish release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag: ${{ steps.version.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Resolve tag and version
+        id: version
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+          fi
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "version=$(python scripts/bump_version.py --current)" >> "$GITHUB_OUTPUT"
+          echo "Releasing ${TAG} (repository version $(python scripts/bump_version.py --current))"
+
+      - name: Check the tag matches the version in SKILL.md
+        run: python scripts/bump_version.py --check --tag "${{ steps.version.outputs.tag }}"
+
+      - name: Validate the skill package (Agent Skills spec)
+        run: python tests/validate_skill.py --strict
+
+      - name: Install test dependencies
+        run: python -m pip install --upgrade pytest
+
+      - name: Run the offline test suite
+        run: python -m pytest tests -q
+
+      - name: Build release artifacts
+        run: python scripts/package_skill.py --out dist
+
+      - name: Extract release notes for this version
+        run: python scripts/extract_release_notes.py --version "${{ steps.version.outputs.version }}" --out release_body.md
+
+      - name: Create or update the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="${{ steps.version.outputs.tag }}"
+          PREFLAG=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.prerelease }}" = "true" ]; then
+            PREFLAG="--prerelease"
+          fi
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG exists — uploading/refreshing assets"
+            gh release upload "$TAG" dist/* --clobber
+            gh release edit "$TAG" --notes-file release_body.md $PREFLAG
+          else
+            gh release create "$TAG" \
+              --title "ResearchX $TAG" \
+              --notes-file release_body.md \
+              --verify-tag \
+              dist/* $PREFLAG
+          fi
+
+      - name: Confirm
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release view "${{ steps.version.outputs.tag }}" --json name,tagName,url,assets --jq '{release:.name, tag:.tagName, url:.url, assets:[.assets[].name]}'

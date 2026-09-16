@@ -156,22 +156,33 @@ def test_readme_has_one_command_installs():
     assert "ResearchX" in readme
 
 
+MIGRATION_MARKERS = ("v3", "upgrad", "repoint", "moved from", "historical", "old path")
+
+
 def test_no_stale_paths_in_docs():
-    """The v4 layout moved ResearchX/ to skills/researchx/ — old paths must not linger."""
+    """The v4 layout moved ResearchX/ to skills/researchx/ — old paths must not linger.
+
+    Migration instructions in the release notes are the one deliberate exception: they exist to tell
+    v3 users exactly which old path to replace.
+    """
+    stale_markers = (
+        "ResearchX/scripts/",
+        "ResearchX/references/",
+        "ResearchX/assets/",
+        "ResearchX/SKILL.md",
+        "ResearchX\\ResearchX",
+    )
     for path in list(REPO.glob("*.md")) + list((REPO / "docs").glob("*.md")) + [
         REPO / ".github" / "workflows" / "validate.yml"
     ]:
         if not path.exists():
             continue
-        text = path.read_text(encoding="utf-8")
-        for stale in (
-            "ResearchX/scripts/",
-            "ResearchX/references/",
-            "ResearchX/assets/",
-            "ResearchX/SKILL.md",
-            "ResearchX\\ResearchX",
-        ):
-            assert stale not in text, f"{path.name} still references {stale}"
+        for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            if any(stale in line for stale in stale_markers):
+                lowered = line.lower()
+                if any(marker in lowered for marker in MIGRATION_MARKERS):
+                    continue
+                raise AssertionError(f"{path.name}:{number} still references a pre-v4 path: {line.strip()}")
 
 
 def test_validator_passes_without_stdlib_module_names():

@@ -9,6 +9,18 @@ without them — it just loses the ability to verify citations against registrie
 
 ---
 
+## Download a release instead of cloning
+
+Prefer a packaged artifact? Take it from the [Releases page](https://github.com/xingguangYan/ResearchX/releases):
+
+```bash
+curl -LO https://github.com/xingguangYan/ResearchX/releases/latest/download/SHA256SUMS
+curl -LO https://github.com/xingguangYan/ResearchX/releases/latest/download/researchx-skill-v4.0.0.zip
+sha256sum -c SHA256SUMS || shasum -a 256 -c SHA256SUMS
+unzip researchx-skill-v4.0.0.zip -d /tmp/researchx
+cp -r /tmp/researchx/researchx ~/.claude/skills/researchx
+```
+
 ## Claude Code
 
 ```bash

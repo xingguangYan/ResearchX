@@ -8,6 +8,10 @@ build/
 venv/
 .pytest_cache/
 
+# Release build output
+/dist/
+RELEASES_BODY.md
+
 # ResearchX runtime artifacts (caches and generated reports)
 .researchx-cache/
 /*.json
