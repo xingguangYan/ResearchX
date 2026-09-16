@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Installation help
+    url: https://github.com/xingguangYan/ResearchX/blob/main/docs/INSTALL.md
+    about: One-command installs for Claude Code, Codex, Cursor, Gemini CLI, MCP clients and more.
+  - name: Security report
+    url: https://github.com/xingguangYan/ResearchX/security/advisories/new
+    about: Report a vulnerability or an unsafe script privately.

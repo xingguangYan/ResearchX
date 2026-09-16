@@ -1,0 +1,34 @@
+name: Bug report
+description: A script, verdict, count or workflow behaves incorrectly
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: The command or prompt, the input, and the observed output.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+      placeholder: "4.0.0 or git rev-parse --short HEAD"
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "Python 3.11, macOS 15, Claude Code 2.x / Codex CLI ..."
+  - type: checkboxes
+    id: integrity
+    attributes:
+      label: Integrity
+      options:
+        - label: This report does not involve a fabricated reference being presented as verified
+          required: false
