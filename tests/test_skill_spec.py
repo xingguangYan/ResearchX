@@ -91,7 +91,7 @@ def _stdlib_names():
     if names:
         return set(names)
     return {
-        "argparse", "ast", "csv", "datetime", "difflib", "hashlib", "io", "json", "math",
+        "__future__", "argparse", "ast", "csv", "datetime", "difflib", "hashlib", "io", "json", "math",
         "os", "pathlib", "re", "subprocess", "sys", "textwrap", "time", "unicodedata",
         "urllib", "xml", "collections", "itertools", "typing", "unittest", "random",
         "shutil", "tempfile", "traceback", "warnings", "types", "abc", "copy", "enum",
@@ -172,6 +172,21 @@ def test_no_stale_paths_in_docs():
             "ResearchX\\ResearchX",
         ):
             assert stale not in text, f"{path.name} still references {stale}"
+
+
+def test_validator_passes_without_stdlib_module_names():
+    """Python 3.9 has no sys.stdlib_module_names — the validator's fallback must still pass."""
+    program = (
+        "import sys\n"
+        "if hasattr(sys, 'stdlib_module_names'):\n"
+        "    del sys.stdlib_module_names\n"
+        "sys.argv = ['validate_skill.py', '--strict']\n"
+        "exec(compile(open('tests/validate_skill.py').read(), 'validate_skill.py', 'exec'))\n"
+    )
+    proc = subprocess.run(
+        [sys.executable, "-c", program], cwd=REPO, capture_output=True, text=True, timeout=300
+    )
+    assert proc.returncode == 0, proc.stdout + proc.stderr
 
 
 def test_validate_skill_passes():

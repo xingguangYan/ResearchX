@@ -47,10 +47,11 @@ def _imports_and_calls(source: str):
 ALLOWED_THIRD_PARTY = set()  # scripts must be standard-library only
 
 FALLBACK_STDLIB = {
-    "argparse", "ast", "collections", "csv", "datetime", "difflib", "hashlib", "io", "json",
-    "math", "os", "pathlib", "random", "re", "shutil", "subprocess", "sys", "tempfile",
+    "__future__", "argparse", "ast", "collections", "csv", "datetime", "difflib", "hashlib", "io",
+    "json", "math", "os", "pathlib", "random", "re", "shutil", "subprocess", "sys", "tempfile",
     "textwrap", "time", "typing", "unicodedata", "urllib", "xml",
 }
+ALLOWED_IMPORTS = FALLBACK_STDLIB | {"rx_common", "skills_ref", "researchx"}
 
 FRONTMATTER_KEYS_OK = {
     "name", "description", "license", "compatibility", "metadata", "allowed-tools",
@@ -176,12 +177,9 @@ def validate(skill_dir: Path, repo: Path, strict: bool) -> int:
         modules, calls_input = _imports_and_calls(source)
         if calls_input:
             errors.append(f"scripts: {script.name} calls input() — scripts must be non-interactive")
-        stdlib_names = getattr(sys, "stdlib_module_names", None) or FALLBACK_STDLIB
+        stdlib_names = set(getattr(sys, "stdlib_module_names", None) or ()) | FALLBACK_STDLIB
         for module in modules:
-            stdlib = module in stdlib_names
-            if not stdlib and module not in ALLOWED_THIRD_PARTY and module not in {
-                "rx_common", "skills_ref", "researchx",
-            }:
+            if module not in stdlib_names and module not in ALLOWED_THIRD_PARTY and module not in ALLOWED_IMPORTS:
                 errors.append(f"scripts: {script.name} imports third-party module {module!r}")
         try:
             result = subprocess.run(
