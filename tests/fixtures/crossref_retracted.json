@@ -1,0 +1,13 @@
+{
+  "status": "ok",
+  "message": {
+    "DOI": "10.1000/retracted.2021.001",
+    "title": ["Deep learning crop yield prediction with leaked labels"],
+    "author": [{"family": "Ivanov", "given": "P"}],
+    "issued": {"date-parts": [[2021, 3, 1]]},
+    "container-title": ["Journal of Agricultural AI"],
+    "type": "journal-article",
+    "is-referenced-by-count": 12,
+    "update-to": [{"type": "retraction", "DOI": "10.1000/retraction.notice.2023"}]
+  }
+}

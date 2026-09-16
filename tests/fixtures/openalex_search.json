@@ -1,0 +1,21 @@
+{
+  "meta": {"count": 1},
+  "results": [
+    {
+      "id": "https://openalex.org/W4401234567",
+      "doi": "https://doi.org/10.1016/j.rse.2024.114123",
+      "title": "A foundation model for global crop mapping from Sentinel-2 time series",
+      "publication_year": 2024,
+      "is_retracted": false,
+      "cited_by_count": 87,
+      "type": "article",
+      "authorships": [
+        {"author": {"display_name": "Wei Chen"}},
+        {"author": {"display_name": "Anil Kumar"}}
+      ],
+      "primary_location": {"source": {"display_name": "Remote Sensing of Environment"}},
+      "open_access": {"is_oa": true},
+      "abstract_inverted_index": {"Crop": [0], "mapping": [1], "at": [2], "scale": [3]}
+    }
+  ]
+}

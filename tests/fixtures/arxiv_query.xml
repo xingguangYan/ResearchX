@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <id>http://arxiv.org/abs/2501.01234v1</id>
+    <published>2025-01-03T00:00:00Z</published>
+    <title>Self-supervised pretraining for label-scarce crop type mapping</title>
+    <summary>We study label efficiency for crop type mapping.</summary>
+    <author><name>Wei Chen</name></author>
+    <author><name>Anil Kumar</name></author>
+  </entry>
+</feed>
