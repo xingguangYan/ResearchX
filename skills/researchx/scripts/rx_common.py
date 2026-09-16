@@ -432,7 +432,8 @@ def judge(
     score = 1.0 if doi_match else title_similarity(query.get("title"), record.get("title"))
     result["score"] = score
     author_ok = surname_match(query.get("surnames") or [], record.get("authors") or []) or doi_match
-    year_ok = years_apart(query.get("year"), record.get("year")) or doi_match
+    # Even with an exact DOI, a wrong year is metadata drift worth reporting.
+    year_ok = years_apart(query.get("year"), record.get("year")) if query.get("year") else True
     result["author_match"] = author_ok
     result["year_match"] = year_ok
 
@@ -445,7 +446,7 @@ def judge(
         return result
 
     if score >= min_score and (author_ok or not query.get("surnames")):
-        if year_ok or query.get("doi"):
+        if year_ok:
             result["verdict"] = VERIFIED
         else:
             result["verdict"] = CORRECTED

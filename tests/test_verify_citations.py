@@ -117,6 +117,21 @@ def test_metadata_drift_is_correctable():
     assert any("year differs" in note for note in verdict["notes"])
 
 
+def test_doi_match_with_wrong_year_is_corrected():
+    query = vc.blank_query(doi="10.1016/j.rse.2024.114123", year="2019", surnames=["Chen"])
+    record = rx.blank_record(
+        source="crossref",
+        doi="10.1016/j.rse.2024.114123",
+        title="A foundation model for global crop mapping from Sentinel-2 time series",
+        authors=["Chen", "Kumar"],
+        year=2024,
+        type="journal-article",
+    )
+    verdict = rx.judge(query, record)
+    assert verdict["verdict"] == rx.CORRECTED
+    assert any("year differs" in note for note in verdict["notes"])
+
+
 def test_unrelated_record_is_not_found():
     query = vc.blank_query(title="Quantum crop mapping with entanglement", surnames=["Smith"], year="2024")
     record = rx.blank_record(

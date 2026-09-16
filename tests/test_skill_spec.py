@@ -85,6 +85,19 @@ def test_assets_templates_present():
     assert len(templates) >= 5, "expected output templates in assets/"
 
 
+def _stdlib_names():
+    """sys.stdlib_module_names exists from Python 3.10; fall back to a known-good set."""
+    names = getattr(sys, "stdlib_module_names", None)
+    if names:
+        return set(names)
+    return {
+        "argparse", "ast", "csv", "datetime", "difflib", "hashlib", "io", "json", "math",
+        "os", "pathlib", "re", "subprocess", "sys", "textwrap", "time", "unicodedata",
+        "urllib", "xml", "collections", "itertools", "typing", "unittest", "random",
+        "shutil", "tempfile", "traceback", "warnings", "types", "abc", "copy", "enum",
+    }
+
+
 def test_scripts_are_stdlib_only_and_non_interactive():
     import ast
 
@@ -102,7 +115,7 @@ def test_scripts_are_stdlib_only_and_non_interactive():
                 calls_input = True
         assert not calls_input, f"{script.name} prompts interactively"
         for module in modules:
-            assert module in sys.stdlib_module_names or module in {"rx_common"}, (
+            assert module in _stdlib_names() or module in {"rx_common"}, (
                 f"{script.name} imports non-stdlib {module}"
             )
 

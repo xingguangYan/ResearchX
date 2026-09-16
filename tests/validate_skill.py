@@ -46,6 +46,12 @@ def _imports_and_calls(source: str):
 
 ALLOWED_THIRD_PARTY = set()  # scripts must be standard-library only
 
+FALLBACK_STDLIB = {
+    "argparse", "ast", "collections", "csv", "datetime", "difflib", "hashlib", "io", "json",
+    "math", "os", "pathlib", "random", "re", "shutil", "subprocess", "sys", "tempfile",
+    "textwrap", "time", "typing", "unicodedata", "urllib", "xml",
+}
+
 FRONTMATTER_KEYS_OK = {
     "name", "description", "license", "compatibility", "metadata", "allowed-tools",
     "version", "author", "homepage", "keywords",
@@ -170,8 +176,9 @@ def validate(skill_dir: Path, repo: Path, strict: bool) -> int:
         modules, calls_input = _imports_and_calls(source)
         if calls_input:
             errors.append(f"scripts: {script.name} calls input() — scripts must be non-interactive")
+        stdlib_names = getattr(sys, "stdlib_module_names", None) or FALLBACK_STDLIB
         for module in modules:
-            stdlib = module in sys.stdlib_module_names if hasattr(sys, "stdlib_module_names") else True
+            stdlib = module in stdlib_names
             if not stdlib and module not in ALLOWED_THIRD_PARTY and module not in {
                 "rx_common", "skills_ref", "researchx",
             }:

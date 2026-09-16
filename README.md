@@ -142,6 +142,8 @@ python skills/researchx/scripts/analyze_methods.py --input papers.json --format 
 python skills/researchx/scripts/generate_visuals.py workflow --topic "..." --palette colorblind
 ```
 
+See a generated example (all six behaviours in one table): [`docs/example-citation-audit.md`](docs/example-citation-audit.md).
+
 Verdicts you will see, and what they mean:
 
 | Verdict | Meaning | Action |
